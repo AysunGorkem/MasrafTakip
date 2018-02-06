@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasrafTakibi.DAL", "MasrafTakibi.DAL\MasrafTakibi.DAL.csproj", "{D42FE08C-560C-4BE0-8F06-C804C9819190}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasrafTakibi.BLL", "MasrafTakibi.BLL\MasrafTakibi.BLL.csproj", "{3A4BC5AC-DD47-4F5D-A502-7012CD75D0F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasrafTakibi.UI", "MasrafTakibi.UI\MasrafTakibi.UI.csproj", "{CCE935FD-0D44-4C29-B720-C9B958EF44C8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D42FE08C-560C-4BE0-8F06-C804C9819190}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D42FE08C-560C-4BE0-8F06-C804C9819190}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D42FE08C-560C-4BE0-8F06-C804C9819190}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D42FE08C-560C-4BE0-8F06-C804C9819190}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A4BC5AC-DD47-4F5D-A502-7012CD75D0F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A4BC5AC-DD47-4F5D-A502-7012CD75D0F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A4BC5AC-DD47-4F5D-A502-7012CD75D0F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A4BC5AC-DD47-4F5D-A502-7012CD75D0F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCE935FD-0D44-4C29-B720-C9B958EF44C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCE935FD-0D44-4C29-B720-C9B958EF44C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCE935FD-0D44-4C29-B720-C9B958EF44C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCE935FD-0D44-4C29-B720-C9B958EF44C8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

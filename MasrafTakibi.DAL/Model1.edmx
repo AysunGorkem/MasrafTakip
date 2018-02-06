@@ -1,0 +1,341 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MasrafDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Calisan">
+          <Key>
+            <PropertyRef Name="CalisanID" />
+          </Key>
+          <Property Name="CalisanID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CalisanAdi" Type="nvarchar" MaxLength="50" />
+          <Property Name="CalisanSoyadi" Type="nvarchar" MaxLength="50" />
+          <Property Name="CalisanBirimi" Type="nvarchar" MaxLength="50" />
+          <Property Name="CalisanSifre" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="KullaniciGiris">
+          <Key>
+            <PropertyRef Name="KullaniciID" />
+          </Key>
+          <Property Name="KullaniciID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KullaniciAdi" Type="nvarchar" MaxLength="50" />
+          <Property Name="KullaniciSifre" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Masraf">
+          <Key>
+            <PropertyRef Name="MasrafID" />
+          </Key>
+          <Property Name="MasrafID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="masrafSahibi" Type="nvarchar" MaxLength="50" />
+          <Property Name="MasrafTipi" Type="nvarchar" MaxLength="50" />
+          <Property Name="MasrafMiktari" Type="nvarchar" MaxLength="50" />
+          <Property Name="MasrafTarihi" Type="datetime" />
+          <Property Name="MasrafAciklama" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ToplamMasraf">
+          <Key>
+            <PropertyRef Name="ToplamMasrafID" />
+          </Key>
+          <Property Name="ToplamMasrafID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KullaniciID" Type="int" Nullable="false" />
+          <Property Name="CalisanID" Type="int" Nullable="false" />
+          <Property Name="YoneticiID" Type="int" Nullable="false" />
+          <Property Name="MasrafID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Yonetici">
+          <Key>
+            <PropertyRef Name="YoneticiID" />
+          </Key>
+          <Property Name="YoneticiID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="YoneticiAdi" Type="nvarchar" MaxLength="50" />
+          <Property Name="YoneticiSoyadi" Type="nvarchar" MaxLength="50" />
+          <Property Name="YoneticiUnvani" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__ToplamMas__Calis__403A8C7D">
+          <End Role="Calisan" Type="Self.Calisan" Multiplicity="1" />
+          <End Role="ToplamMasraf" Type="Self.ToplamMasraf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Calisan">
+              <PropertyRef Name="CalisanID" />
+            </Principal>
+            <Dependent Role="ToplamMasraf">
+              <PropertyRef Name="CalisanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ToplamMas__Kulla__3F466844">
+          <End Role="KullaniciGiris" Type="Self.KullaniciGiris" Multiplicity="1" />
+          <End Role="ToplamMasraf" Type="Self.ToplamMasraf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KullaniciGiris">
+              <PropertyRef Name="KullaniciID" />
+            </Principal>
+            <Dependent Role="ToplamMasraf">
+              <PropertyRef Name="KullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ToplamMas__Masra__4222D4EF">
+          <End Role="Masraf" Type="Self.Masraf" Multiplicity="1" />
+          <End Role="ToplamMasraf" Type="Self.ToplamMasraf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Masraf">
+              <PropertyRef Name="MasrafID" />
+            </Principal>
+            <Dependent Role="ToplamMasraf">
+              <PropertyRef Name="MasrafID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ToplamMas__Yonet__412EB0B6">
+          <End Role="Yonetici" Type="Self.Yonetici" Multiplicity="1" />
+          <End Role="ToplamMasraf" Type="Self.ToplamMasraf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Yonetici">
+              <PropertyRef Name="YoneticiID" />
+            </Principal>
+            <Dependent Role="ToplamMasraf">
+              <PropertyRef Name="YoneticiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MasrafDBModelStoreContainer">
+          <EntitySet Name="Calisan" EntityType="Self.Calisan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KullaniciGiris" EntityType="Self.KullaniciGiris" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Masraf" EntityType="Self.Masraf" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ToplamMasraf" EntityType="Self.ToplamMasraf" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Yonetici" EntityType="Self.Yonetici" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__ToplamMas__Calis__403A8C7D" Association="Self.FK__ToplamMas__Calis__403A8C7D">
+            <End Role="Calisan" EntitySet="Calisan" />
+            <End Role="ToplamMasraf" EntitySet="ToplamMasraf" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ToplamMas__Kulla__3F466844" Association="Self.FK__ToplamMas__Kulla__3F466844">
+            <End Role="KullaniciGiris" EntitySet="KullaniciGiris" />
+            <End Role="ToplamMasraf" EntitySet="ToplamMasraf" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ToplamMas__Masra__4222D4EF" Association="Self.FK__ToplamMas__Masra__4222D4EF">
+            <End Role="Masraf" EntitySet="Masraf" />
+            <End Role="ToplamMasraf" EntitySet="ToplamMasraf" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ToplamMas__Yonet__412EB0B6" Association="Self.FK__ToplamMas__Yonet__412EB0B6">
+            <End Role="Yonetici" EntitySet="Yonetici" />
+            <End Role="ToplamMasraf" EntitySet="ToplamMasraf" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MasrafDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Calisan">
+          <Key>
+            <PropertyRef Name="CalisanID" />
+          </Key>
+          <Property Name="CalisanID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CalisanAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CalisanSoyadi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CalisanBirimi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CalisanSifre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ToplamMasraf" Relationship="Self.FK__ToplamMas__Calis__403A8C7D" FromRole="Calisan" ToRole="ToplamMasraf" />
+        </EntityType>
+        <EntityType Name="KullaniciGiris">
+          <Key>
+            <PropertyRef Name="KullaniciID" />
+          </Key>
+          <Property Name="KullaniciID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KullaniciAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KullaniciSifre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ToplamMasraf" Relationship="Self.FK__ToplamMas__Kulla__3F466844" FromRole="KullaniciGiris" ToRole="ToplamMasraf" />
+        </EntityType>
+        <EntityType Name="Masraf">
+          <Key>
+            <PropertyRef Name="MasrafID" />
+          </Key>
+          <Property Name="MasrafID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="masrafSahibi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MasrafTipi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MasrafMiktari" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MasrafTarihi" Type="DateTime" Precision="3" />
+          <Property Name="MasrafAciklama" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ToplamMasraf" Relationship="Self.FK__ToplamMas__Masra__4222D4EF" FromRole="Masraf" ToRole="ToplamMasraf" />
+        </EntityType>
+        <EntityType Name="ToplamMasraf">
+          <Key>
+            <PropertyRef Name="ToplamMasrafID" />
+          </Key>
+          <Property Name="ToplamMasrafID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KullaniciID" Type="Int32" Nullable="false" />
+          <Property Name="CalisanID" Type="Int32" Nullable="false" />
+          <Property Name="YoneticiID" Type="Int32" Nullable="false" />
+          <Property Name="MasrafID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Calisan" Relationship="Self.FK__ToplamMas__Calis__403A8C7D" FromRole="ToplamMasraf" ToRole="Calisan" />
+          <NavigationProperty Name="KullaniciGiris" Relationship="Self.FK__ToplamMas__Kulla__3F466844" FromRole="ToplamMasraf" ToRole="KullaniciGiris" />
+          <NavigationProperty Name="Masraf" Relationship="Self.FK__ToplamMas__Masra__4222D4EF" FromRole="ToplamMasraf" ToRole="Masraf" />
+          <NavigationProperty Name="Yonetici" Relationship="Self.FK__ToplamMas__Yonet__412EB0B6" FromRole="ToplamMasraf" ToRole="Yonetici" />
+        </EntityType>
+        <EntityType Name="Yonetici">
+          <Key>
+            <PropertyRef Name="YoneticiID" />
+          </Key>
+          <Property Name="YoneticiID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="YoneticiAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="YoneticiSoyadi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="YoneticiUnvani" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ToplamMasraf" Relationship="Self.FK__ToplamMas__Yonet__412EB0B6" FromRole="Yonetici" ToRole="ToplamMasraf" />
+        </EntityType>
+        <Association Name="FK__ToplamMas__Calis__403A8C7D">
+          <End Role="Calisan" Type="Self.Calisan" Multiplicity="1" />
+          <End Role="ToplamMasraf" Type="Self.ToplamMasraf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Calisan">
+              <PropertyRef Name="CalisanID" />
+            </Principal>
+            <Dependent Role="ToplamMasraf">
+              <PropertyRef Name="CalisanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ToplamMas__Kulla__3F466844">
+          <End Role="KullaniciGiris" Type="Self.KullaniciGiris" Multiplicity="1" />
+          <End Role="ToplamMasraf" Type="Self.ToplamMasraf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KullaniciGiris">
+              <PropertyRef Name="KullaniciID" />
+            </Principal>
+            <Dependent Role="ToplamMasraf">
+              <PropertyRef Name="KullaniciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ToplamMas__Masra__4222D4EF">
+          <End Role="Masraf" Type="Self.Masraf" Multiplicity="1" />
+          <End Role="ToplamMasraf" Type="Self.ToplamMasraf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Masraf">
+              <PropertyRef Name="MasrafID" />
+            </Principal>
+            <Dependent Role="ToplamMasraf">
+              <PropertyRef Name="MasrafID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ToplamMas__Yonet__412EB0B6">
+          <End Role="Yonetici" Type="Self.Yonetici" Multiplicity="1" />
+          <End Role="ToplamMasraf" Type="Self.ToplamMasraf" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Yonetici">
+              <PropertyRef Name="YoneticiID" />
+            </Principal>
+            <Dependent Role="ToplamMasraf">
+              <PropertyRef Name="YoneticiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MasrafDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Calisan" EntityType="Self.Calisan" />
+          <EntitySet Name="KullaniciGiris" EntityType="Self.KullaniciGiris" />
+          <EntitySet Name="Masraf" EntityType="Self.Masraf" />
+          <EntitySet Name="ToplamMasraf" EntityType="Self.ToplamMasraf" />
+          <EntitySet Name="Yonetici" EntityType="Self.Yonetici" />
+          <AssociationSet Name="FK__ToplamMas__Calis__403A8C7D" Association="Self.FK__ToplamMas__Calis__403A8C7D">
+            <End Role="Calisan" EntitySet="Calisan" />
+            <End Role="ToplamMasraf" EntitySet="ToplamMasraf" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ToplamMas__Kulla__3F466844" Association="Self.FK__ToplamMas__Kulla__3F466844">
+            <End Role="KullaniciGiris" EntitySet="KullaniciGiris" />
+            <End Role="ToplamMasraf" EntitySet="ToplamMasraf" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ToplamMas__Masra__4222D4EF" Association="Self.FK__ToplamMas__Masra__4222D4EF">
+            <End Role="Masraf" EntitySet="Masraf" />
+            <End Role="ToplamMasraf" EntitySet="ToplamMasraf" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ToplamMas__Yonet__412EB0B6" Association="Self.FK__ToplamMas__Yonet__412EB0B6">
+            <End Role="Yonetici" EntitySet="Yonetici" />
+            <End Role="ToplamMasraf" EntitySet="ToplamMasraf" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MasrafDBModelStoreContainer" CdmEntityContainer="MasrafDBEntities">
+          <EntitySetMapping Name="Calisan">
+            <EntityTypeMapping TypeName="MasrafDBModel.Calisan">
+              <MappingFragment StoreEntitySet="Calisan">
+                <ScalarProperty Name="CalisanID" ColumnName="CalisanID" />
+                <ScalarProperty Name="CalisanAdi" ColumnName="CalisanAdi" />
+                <ScalarProperty Name="CalisanSoyadi" ColumnName="CalisanSoyadi" />
+                <ScalarProperty Name="CalisanBirimi" ColumnName="CalisanBirimi" />
+                <ScalarProperty Name="CalisanSifre" ColumnName="CalisanSifre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KullaniciGiris">
+            <EntityTypeMapping TypeName="MasrafDBModel.KullaniciGiris">
+              <MappingFragment StoreEntitySet="KullaniciGiris">
+                <ScalarProperty Name="KullaniciID" ColumnName="KullaniciID" />
+                <ScalarProperty Name="KullaniciAdi" ColumnName="KullaniciAdi" />
+                <ScalarProperty Name="KullaniciSifre" ColumnName="KullaniciSifre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Masraf">
+            <EntityTypeMapping TypeName="MasrafDBModel.Masraf">
+              <MappingFragment StoreEntitySet="Masraf">
+                <ScalarProperty Name="MasrafID" ColumnName="MasrafID" />
+                <ScalarProperty Name="masrafSahibi" ColumnName="masrafSahibi" />
+                <ScalarProperty Name="MasrafTipi" ColumnName="MasrafTipi" />
+                <ScalarProperty Name="MasrafMiktari" ColumnName="MasrafMiktari" />
+                <ScalarProperty Name="MasrafTarihi" ColumnName="MasrafTarihi" />
+                <ScalarProperty Name="MasrafAciklama" ColumnName="MasrafAciklama" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ToplamMasraf">
+            <EntityTypeMapping TypeName="MasrafDBModel.ToplamMasraf">
+              <MappingFragment StoreEntitySet="ToplamMasraf">
+                <ScalarProperty Name="ToplamMasrafID" ColumnName="ToplamMasrafID" />
+                <ScalarProperty Name="KullaniciID" ColumnName="KullaniciID" />
+                <ScalarProperty Name="CalisanID" ColumnName="CalisanID" />
+                <ScalarProperty Name="YoneticiID" ColumnName="YoneticiID" />
+                <ScalarProperty Name="MasrafID" ColumnName="MasrafID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Yonetici">
+            <EntityTypeMapping TypeName="MasrafDBModel.Yonetici">
+              <MappingFragment StoreEntitySet="Yonetici">
+                <ScalarProperty Name="YoneticiID" ColumnName="YoneticiID" />
+                <ScalarProperty Name="YoneticiAdi" ColumnName="YoneticiAdi" />
+                <ScalarProperty Name="YoneticiSoyadi" ColumnName="YoneticiSoyadi" />
+                <ScalarProperty Name="YoneticiUnvani" ColumnName="YoneticiUnvani" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
